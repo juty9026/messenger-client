@@ -1,13 +1,25 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
+import AppContext from "./context/AppContext";
 import ChatMessageType from "./types/ChatMessage";
+import UserProfile from "./types/UserProfile";
 
 interface ChatMessageProps {
+  senderProfile: UserProfile;
   message: ChatMessageType;
 }
-const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+const ChatMessage: React.FC<ChatMessageProps> = ({
+  senderProfile,
+  message
+}) => {
+  const { userId } = useContext(AppContext);
+
   const mine = useMemo(() => {
-    return message.senderId === 1;
-  }, [message]);
+    if (!senderProfile || !userId) {
+      return;
+    }
+
+    return senderProfile.id === userId;
+  }, [senderProfile, userId]);
 
   const alignClass = useMemo(() => {
     return mine ? "right" : "left";

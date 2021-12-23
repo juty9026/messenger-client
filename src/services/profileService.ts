@@ -1,12 +1,19 @@
 import axios from "../axiosInstance";
 
 interface FetchUserProfileProps {
-  userId?: number;
+  userIds?: number | number[];
 }
-const fetchUserProfile = async ({ userId }: FetchUserProfileProps) => {
+const fetchUserProfile = async ({ userIds }: FetchUserProfileProps) => {
+  const isNull = userIds === undefined || userIds === null;
+  const isEmpty = Array.isArray(userIds) && userIds.length === 0;
+  if (isNull || isEmpty) {
+    console.info("no userId(s) provided. return empty array.");
+    return [];
+  }
+
   try {
     const { data } = await axios.get("/userProfiles", {
-      params: { userId }
+      params: { id: userIds }
     });
     return data;
   } catch (e) {
