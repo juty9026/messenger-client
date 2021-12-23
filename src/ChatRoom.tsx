@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ChatMessageProps from "./types/ChatMessage";
 import ChatMessage from "./ChatMessage";
+import { chatService } from "./services";
 
-const ChatRoom: React.FC = () => {
+interface ChatRoomProps {
+  chatRoomId: number;
+}
+const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
+  const [messages, setMessages] = useState<ChatMessageProps[]>([]);
+
+  const fetchChatMessages = async (chatRoomId: number) => {
+    const data = await chatService.fetchChatMessages({ chatRoomId });
+    setMessages(data);
+  };
+
+  useEffect(() => {
+    fetchChatMessages(chatRoomId);
+  }, [chatRoomId]);
   return (
     <div className="ChatRoom">
       <div className="container">
-        <ChatMessage>message1</ChatMessage>
-        <ChatMessage>message2</ChatMessage>
-        <ChatMessage>message3</ChatMessage>
-        <ChatMessage>message4</ChatMessage>
+        {messages.map((m) => (
+          <ChatMessage key={m.id} message={m} />
+        ))}
       </div>
     </div>
   );

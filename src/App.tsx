@@ -5,7 +5,7 @@ import ChatRoom from "./ChatRoom";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <ChatRoom />
+      <ChatRoom chatRoomId={1} />
     </div>
   );
 };

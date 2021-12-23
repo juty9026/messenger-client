@@ -1,7 +1,11 @@
 import React from "react";
+import ChatMessageType from "./types/ChatMessage";
 
-const ChatMessage: React.FC = ({ children }) => {
-  return <p className="ChatMessage">{children}</p>;
+interface ChatMessageProps {
+  message: ChatMessageType;
+}
+const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+  return <p className="ChatMessage">{message.text}</p>;
 };
 
 export default ChatMessage;
