@@ -10,7 +10,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   }, [message]);
 
   const alignClass = useMemo(() => {
-    console.log(mine);
     return mine ? "right" : "left";
   }, [mine]);
 
