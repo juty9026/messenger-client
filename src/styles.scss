@@ -2,3 +2,17 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.Chat {
+  max-width: 360px;
+  height: 90vh;
+  margin: 5vh auto 5vh auto;
+  background-color: silver;
+
+  & .container {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}
