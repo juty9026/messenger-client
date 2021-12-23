@@ -1,9 +1,16 @@
 import React, { createContext, useState } from "react";
 
-const AppContext = createContext(null);
+interface AppContextProps {
+  userId?: number;
+  setUserId: (userId: number | undefined) => void;
+}
+const AppContext = createContext<AppContextProps>({
+  userId: undefined,
+  setUserId: () => {}
+});
 
 const AppContextProvider: React.FC = ({ children }) => {
-  const [userId, setUserId] = useState<number>(undefined);
+  const [userId, setUserId] = useState<number | undefined>(undefined);
 
   return (
     <AppContext.Provider value={{ userId, setUserId }}>

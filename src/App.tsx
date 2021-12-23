@@ -1,8 +1,15 @@
 import "./styles.scss";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import AppContext from "./context/AppContext";
 import ChatRoom from "./ChatRoom";
 
 const App: React.FC = () => {
+  const { setUserId } = useContext(AppContext);
+
+  useEffect(() => {
+    setUserId(1);
+  }, [setUserId]);
+
   return (
     <div className="App">
       <ChatRoom chatRoomId={1} />
