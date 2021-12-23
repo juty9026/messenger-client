@@ -1,8 +1,8 @@
 import React from "react";
 
-const Chat: React.FC = () => {
+const ChatRoom: React.FC = () => {
   return (
-    <div className="Chat">
+    <div className="ChatRoom">
       <div className="container">
         <div>message1</div>
         <div>message2</div>
@@ -13,4 +13,4 @@ const Chat: React.FC = () => {
   );
 };
 
-export default Chat;
+export default ChatRoom;

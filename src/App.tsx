@@ -1,11 +1,11 @@
 import "./styles.scss";
 import React from "react";
-import Chat from "./ChatRoom";
+import ChatRoom from "./ChatRoom";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Chat />
+      <ChatRoom />
     </div>
   );
 };
