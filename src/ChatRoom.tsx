@@ -1,13 +1,14 @@
 import React from "react";
+import ChatMessage from "./ChatMessage";
 
 const ChatRoom: React.FC = () => {
   return (
     <div className="ChatRoom">
       <div className="container">
-        <div>message1</div>
-        <div>message2</div>
-        <div>message3</div>
-        <div>message4</div>
+        <ChatMessage>message1</ChatMessage>
+        <ChatMessage>message2</ChatMessage>
+        <ChatMessage>message3</ChatMessage>
+        <ChatMessage>message4</ChatMessage>
       </div>
     </div>
   );
