@@ -9,7 +9,6 @@ interface ChatRoomProps {
 }
 const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   const [messages, setMessages] = useState<ChatMessageProps[]>([]);
-  const [senderIds, setSenderIds] = useState<number[]>([]);
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
 
   const fetchChatMessages = async (chatRoomId: number) => {
@@ -31,12 +30,12 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   }, [chatRoomId]);
 
   useEffect(() => {
-    setSenderIds(Array.from(new Set(messages.map((m) => m.senderId))));
+    const senderIds = messages.map((m) => m.senderId);
+    const uniqueSenderIds = Array.from(new Set(senderIds));
+    if (uniqueSenderIds.length > 0) {
+      fetchUserProfiles(uniqueSenderIds);
+    }
   }, [messages]);
-
-  useEffect(() => {
-    fetchUserProfiles(senderIds);
-  }, [senderIds]);
 
   return (
     <div className="ChatRoom">
