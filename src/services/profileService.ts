@@ -10,7 +10,6 @@ const fetchUserProfile = async ({ userIds }: FetchUserProfileProps) => {
     });
     return data;
   } catch (e) {
-    console.error(e);
     return [];
   }
 };

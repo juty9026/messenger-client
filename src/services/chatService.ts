@@ -10,7 +10,6 @@ const fetchChatMessages = async ({ chatRoomId }: FetchChatMessagesProps) => {
     });
     return data;
   } catch (e) {
-    console.error(e);
     return [];
   }
 };
