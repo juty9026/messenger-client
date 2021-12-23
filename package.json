@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/react": "17.0.37",
+    "axios": "0.24.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3"
@@ -23,5 +24,6 @@
     "eject": "react-scripts eject",
     "json-server": "nodemon --delay 1000ms --watch data --exec \"json-server data/_db.js --config data/config.json\""
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
+  "proxy": "http://localhost:5000"
 }
