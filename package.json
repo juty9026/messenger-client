@@ -18,11 +18,7 @@
     "sass": "1.45.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "json-server": "nodemon --delay 1000ms --watch data --exec \"json-server data/_db.js --config data/config.json\""
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
   },
   "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "proxy": "http://localhost:5000"
