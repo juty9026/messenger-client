@@ -30,7 +30,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   }, [chatRoomId]);
 
   useEffect(() => {
-    const senderIds = messages.map((m) => m.senderId);
+    const senderIds = messages.map(({ senderId }) => senderId);
     const uniqueSenderIds = Array.from(new Set(senderIds));
     if (uniqueSenderIds.length > 0) {
       fetchUserProfiles(uniqueSenderIds);
@@ -40,11 +40,11 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   return (
     <div className="ChatRoom">
       <div className="container">
-        {messages.map((m) => (
+        {messages.map(({ id, senderId, text }) => (
           <ChatMessage
-            key={m.id}
-            message={m}
-            senderProfile={getSenderProfile(m.senderId)}
+            key={id}
+            text={text}
+            senderProfile={getSenderProfile(senderId)}
           />
         ))}
       </div>
