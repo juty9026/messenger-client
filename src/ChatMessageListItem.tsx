@@ -31,7 +31,7 @@ const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
   }, [owner]);
 
   return (
-    <li className={`ChatMessage ${itemClass} ChatMessageListItem`}>
+    <li className={`ChatMessageListItem ${itemClass}`}>
       <div className="ballon">{text}</div>
     </li>
   );
