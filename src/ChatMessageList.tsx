@@ -28,7 +28,7 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({ messages }) => {
   };
 
   return (
-    <ul>
+    <ol className="ChatMessageList">
       {messages.map(({ id, senderId, text }) => (
         <ChatMessageListItem
           key={id}
@@ -36,7 +36,7 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({ messages }) => {
           senderProfile={getSenderProfile(senderId)}
         />
       ))}
-    </ul>
+    </ol>
   );
 };
 

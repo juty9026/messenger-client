@@ -24,9 +24,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
   return (
     <div className="ChatRoom">
-      <div className="container">
-        {hasMessage && <ChatMessageList messages={messages} />}
-      </div>
+      {hasMessage && <ChatMessageList messages={messages} />}
     </div>
   );
 };

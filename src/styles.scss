@@ -1,29 +1,31 @@
 * {
   margin: 0;
   padding: 0;
-}
-
-li {
-  list-style-type: none;
+  box-sizing: border-box;
 }
 
 .App {
+  max-width: 360px;
+  height: 90vh;
+  margin: 5vh auto;
   font-family: sans-serif;
   text-align: center;
 }
 
 .ChatRoom {
-  max-width: 360px;
   height: 90vh;
-  margin: 5vh auto 5vh auto;
-  background-color: silver;
+  background-color: #9bbbd4;
+  overflow-y: scroll;
+}
 
-  & .container {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+.ChatMessageList {
+  min-height: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  list-style-type: none;
 }
 
 .ChatMessage {
@@ -35,9 +37,23 @@ li {
   
   &.theirs {
     text-align: left;
+
+      & .ballon {
+        background-color: #ffffff;
+      }
   }
 
   &.mine {
     text-align: right;
+
+    & .ballon {
+      background-color: #fef01b;
+    }
+  }
+
+  & .ballon {
+    border-radius: 6px;
+    padding: 4px 6px;
+    display: inline-block;
   }
 }
