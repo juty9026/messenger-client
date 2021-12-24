@@ -15,4 +15,4 @@ const fetchChatMessages = async ({ chatRoomId }: FetchChatMessagesProps) => {
   }
 };
 
-export { fetchChatMessages };
+export default { fetchChatMessages };

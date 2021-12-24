@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ChatMessage from "./types/ChatMessage";
 import ChatMessageListItem from "./ChatMessageListItem";
-import { profileService } from "./services";
+import profileService from "./services/profileService";
 import UserProfile from "./types/UserProfile";
 
 interface ChatMessageListProps {
@@ -11,7 +11,7 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({ messages }) => {
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
 
   const fetchUserProfiles = async (userIds: number[]) => {
-    const data = await profileService.fetchUserProfile({ userIds });
+    const data = await profileService.fetchUserProfiles({ userIds });
     setUserProfiles(data);
   };
 

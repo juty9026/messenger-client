@@ -4,7 +4,7 @@ import UserProfile from "../types/UserProfile";
 interface FetchUserProfileProps {
   userIds?: number | number[];
 }
-const fetchUserProfile = async ({ userIds }: FetchUserProfileProps) => {
+const fetchUserProfiles = async ({ userIds }: FetchUserProfileProps) => {
   try {
     const { data } = await axios.get<UserProfile[]>("/userProfiles", {
       params: { id: userIds }
@@ -15,4 +15,4 @@ const fetchUserProfile = async ({ userIds }: FetchUserProfileProps) => {
   }
 };
 
-export { fetchUserProfile };
+export default { fetchUserProfiles };

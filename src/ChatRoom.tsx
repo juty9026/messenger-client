@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ChatMessage from "./types/ChatMessage";
 import ChatMessageList from "./ChatMessageList";
-import { chatService } from "./services";
+import chatService from "./services/chatService";
 
 interface ChatRoomProps {
   chatRoomId: number;
