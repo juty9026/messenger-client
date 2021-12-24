@@ -1,52 +1,31 @@
-import React, { useEffect, useState } from "react";
-import ChatMessageProps from "./types/ChatMessage";
-import UserProfile from "./types/UserProfile";
-import ChatMessage from "./ChatMessage";
-import { chatService, profileService } from "./services";
+import React, { useEffect, useMemo, useState } from "react";
+import ChatMessage from "./types/ChatMessage";
+import ChatMessageList from "./ChatMessageList";
+import { chatService } from "./services";
 
 interface ChatRoomProps {
   chatRoomId: number;
 }
 const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
-  const [messages, setMessages] = useState<ChatMessageProps[]>([]);
-  const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+  const hasMessage = useMemo(() => {
+    return messages.length > 0;
+  }, [messages]);
 
   const fetchChatMessages = async (chatRoomId: number) => {
     const data = await chatService.fetchChatMessages({ chatRoomId });
     setMessages(data);
   };
 
-  const fetchUserProfiles = async (userIds: number[]) => {
-    const data = await profileService.fetchUserProfile({ userIds });
-    setUserProfiles(data);
-  };
-
-  const getSenderProfile = (senderId: number) => {
-    return userProfiles.find((p) => p.id === senderId)!;
-  };
-
   useEffect(() => {
     fetchChatMessages(chatRoomId);
   }, [chatRoomId]);
 
-  useEffect(() => {
-    const senderIds = messages.map(({ senderId }) => senderId);
-    const uniqueSenderIds = Array.from(new Set(senderIds));
-    if (uniqueSenderIds.length > 0) {
-      fetchUserProfiles(uniqueSenderIds);
-    }
-  }, [messages]);
-
   return (
     <div className="ChatRoom">
       <div className="container">
-        {messages.map(({ id, senderId, text }) => (
-          <ChatMessage
-            key={id}
-            text={text}
-            senderProfile={getSenderProfile(senderId)}
-          />
-        ))}
+        {hasMessage && <ChatMessageList messages={messages} />}
       </div>
     </div>
   );

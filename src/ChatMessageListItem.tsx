@@ -2,11 +2,14 @@ import React, { useContext, useMemo } from "react";
 import AppContext from "./context/AppContext";
 import UserProfile from "./types/UserProfile";
 
-interface ChatMessageProps {
+interface ChatMessageListItemProps {
   senderProfile: UserProfile;
   text: string;
 }
-const ChatMessage: React.FC<ChatMessageProps> = ({ senderProfile, text }) => {
+const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
+  senderProfile,
+  text
+}) => {
   const { userId } = useContext(AppContext);
 
   const mine = useMemo(() => {
@@ -24,4 +27,4 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ senderProfile, text }) => {
   return <p className={`ChatMessage ${alignClass}`}>{text}</p>;
 };
 
-export default ChatMessage;
+export default ChatMessageListItem;
