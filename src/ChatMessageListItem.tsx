@@ -19,6 +19,10 @@ const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
     return senderProfile?.id === userId ? "me" : "them";
   }, [userId, senderProfile]);
 
+  const profileImageSrc = useMemo(() => {
+    return senderProfile?.avatarSrc;
+  }, [senderProfile]);
+
   const itemClass = useMemo(() => {
     switch (owner) {
       case "me":
@@ -32,7 +36,17 @@ const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
 
   return (
     <li className={`ChatMessageListItem ${itemClass}`}>
-      <div className="ballon">{text}</div>
+      <div>
+        {profileImageSrc && (
+          <img
+            className="profile-thumb"
+            src={`/images/${profileImageSrc}`}
+            alt={profileImageSrc}
+          />
+        )}
+        <span className="name">{senderProfile?.name}</span>
+        <div className="ballon">{text}</div>
+      </div>
     </li>
   );
 };

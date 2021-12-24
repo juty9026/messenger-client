@@ -51,9 +51,17 @@
     }
   }
 
+  & .profile-thumb {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    clip-path: circle(50%);
+  }
+
   & .ballon {
-    border-radius: 6px;
     padding: 4px 6px;
+    vertical-align: middle;
     display: inline-block;
+    border-radius: 6px;
   }
 }
