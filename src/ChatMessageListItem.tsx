@@ -12,19 +12,25 @@ const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
 }) => {
   const { userId } = useContext(AppContext);
 
-  const mine = useMemo(() => {
-    if (!senderProfile || !userId) {
-      return;
+  const owner = useMemo(() => {
+    if (userId === undefined || senderProfile?.id === undefined) {
+      return "unknown";
     }
+    return senderProfile?.id === userId ? "me" : "them";
+  }, [userId, senderProfile]);
 
-    return senderProfile.id === userId;
-  }, [senderProfile, userId]);
+  const itemClass = useMemo(() => {
+    switch (owner) {
+      case "me":
+        return "mine";
+      case "them":
+        return "theirs";
+      default:
+        return "unknown";
+    }
+  }, [owner]);
 
-  const alignClass = useMemo(() => {
-    return mine ? "right" : "left";
-  }, [mine]);
-
-  return <p className={`ChatMessage ${alignClass}`}>{text}</p>;
+  return <li className={`ChatMessage ${itemClass}`}>{text}</li>;
 };
 
 export default ChatMessageListItem;

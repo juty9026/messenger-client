@@ -7,7 +7,6 @@ import UserProfile from "./types/UserProfile";
 interface ChatMessageListProps {
   messages: ChatMessage[];
 }
-
 const ChatMessageList: React.FC<ChatMessageListProps> = ({ messages }) => {
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
 

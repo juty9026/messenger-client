@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+li {
+  list-style-type: none;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -25,11 +29,15 @@
 .ChatMessage {
   flex: 0;
 
-  &.left {
+  &.unknown {
+    display: none;
+  }
+  
+  &.theirs {
     text-align: left;
   }
 
-  &.right {
+  &.mine {
     text-align: right;
   }
 }
