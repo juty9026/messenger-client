@@ -15,6 +15,11 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
 }) => {
   const { userId } = useContext(AppContext);
 
+  const timeDisplayText = useMemo(() => {
+    const date = new Date();
+    return `${date.getHours()}:${date.getMinutes()}`;
+  }, []);
+
   const owner: ChatMessageOwner = useMemo(() => {
     if (userId === undefined || userProfile?.id === undefined) {
       return "unknown";
@@ -51,7 +56,7 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
         <ChatMessageList messages={group} />
       </div>
       <div className="time">
-        <span>17:01</span>
+        <span>{timeDisplayText}</span>
       </div>
     </div>
   );
