@@ -24,6 +24,27 @@
   }
 }
 
+.ChatMessageGroup {
+  display: flex;
+
+  & .avatar-thumb-wrap {
+    flex: 0 0;
+    min-width: 40px;
+    min-height: 40px;
+
+      & .avatar-thumb {
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+        clip-path: circle(50%);
+      }
+  }
+
+  & > div {
+    flex: 1;
+  }
+}
+
 .ChatMessageList {
   padding: 12px;
   display: flex;
@@ -53,13 +74,6 @@
     & .ballon {
       background-color: #fef01b;
     }
-  }
-
-  & .profile-thumb {
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-    clip-path: circle(50%);
   }
 
   & .ballon {

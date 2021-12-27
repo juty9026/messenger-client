@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ChatMessage from "./types/ChatMessage";
-import ChatMessageList from "./ChatMessageList";
+import ChatMessageGroup from "./ChatMessageGroup";
 import chatService from "./services/chatService";
 import useDelay from "./hooks/useDelay";
 import useMessageGroup from "./hooks/useMessgeGroup";
@@ -52,32 +52,26 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
     if (delayState.finish) {
       timeout = setTimeout(() => {
-        delayApi.reset();
+        // delayApi.reset();
       }, 5000);
     }
 
     return () => clearTimeout(timeout);
   }, [delayState.finish, delayApi]);
 
-  const getSenderProfile = (senderId: number) => {
+  const getSenderProfile = (senderId: number): UserProfile => {
     return userProfiles.find((p) => p.id === senderId)!;
   };
 
   return (
     <div className="ChatRoom" ref={chatRoomRef}>
-      {messageGroups.map((messages, i) => {
-        if (messages.length === 0) {
-          return null;
-        }
-        const userProfile: UserProfile = getSenderProfile(messages[0].senderId);
-        return (
-          <ChatMessageList
-            key={`${i}_${userProfile.name}`}
-            userProfile={userProfile}
-            messages={messages}
-          />
-        );
-      })}
+      {messageGroups.map((group, i) => (
+        <ChatMessageGroup
+          key={i}
+          group={group}
+          userProfile={getSenderProfile(group[0].senderId)}
+        />
+      ))}
       <div ref={bottomRef} />
     </div>
   );

@@ -1,28 +1,14 @@
-import React, { useContext, useMemo } from "react";
-import AppContext from "./context/AppContext";
-import UserProfile from "./types/UserProfile";
+import React, { useMemo } from "react";
+import ChatMessageOwner from "./types/ChatMessageOwner";
 
 interface ChatMessageListItemProps {
-  senderProfile: UserProfile;
+  owner: ChatMessageOwner;
   text: string;
 }
 const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
-  senderProfile,
+  owner,
   text
 }) => {
-  const { userId } = useContext(AppContext);
-
-  const owner = useMemo(() => {
-    if (userId === undefined || senderProfile?.id === undefined) {
-      return "unknown";
-    }
-    return senderProfile?.id === userId ? "me" : "them";
-  }, [userId, senderProfile]);
-
-  const profileImageSrc = useMemo(() => {
-    return senderProfile?.avatarSrc;
-  }, [senderProfile]);
-
   const itemClass = useMemo(() => {
     switch (owner) {
       case "me":
@@ -36,17 +22,7 @@ const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
 
   return (
     <li className={`ChatMessageListItem ${itemClass}`}>
-      <div>
-        {profileImageSrc && (
-          <img
-            className="profile-thumb"
-            src={`/images/${profileImageSrc}`}
-            alt={profileImageSrc}
-          />
-        )}
-        <span className="name">{senderProfile?.name}</span>
-        <div className="ballon">{text}</div>
-      </div>
+      <div className="ballon">{text}</div>
     </li>
   );
 };
