@@ -22,17 +22,30 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
     return userProfile?.id === userId ? "me" : "them";
   }, [userId, userProfile]);
 
+  const ownerClass = useMemo(() => {
+    switch (owner) {
+      case "me":
+        return "mine";
+      case "them":
+        return "theirs";
+      default:
+        return "unknown";
+    }
+  }, [owner]);
+
   return (
-    <div className="ChatMessageGroup">
-      <div className="avatar">
-        {userProfile?.avatarSrc && (
-          <img
-            className="avatar-thumb"
-            src={`/images/${userProfile.avatarSrc}`}
-            alt={userProfile.avatarSrc}
-          />
-        )}
-      </div>
+    <div className={`ChatMessageGroup ${ownerClass}`}>
+      {owner === "them" && (
+        <div className="avatar">
+          {userProfile?.avatarSrc && (
+            <img
+              className="avatar-thumb"
+              src={`/images/${userProfile.avatarSrc}`}
+              alt={userProfile.avatarSrc}
+            />
+          )}
+        </div>
+      )}
       <div className="main">
         {owner === "them" && <span className="name">{userProfile?.name}</span>}
         <ChatMessageList
