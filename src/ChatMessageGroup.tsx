@@ -50,7 +50,9 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
         {owner === "them" && <span className="name">{userProfile?.name}</span>}
         <ChatMessageList messages={group} />
       </div>
-      <div className="time" />
+      <div className="time">
+        <span>17:01</span>
+      </div>
     </div>
   );
 };

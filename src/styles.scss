@@ -1,4 +1,5 @@
 * {
+  position: relative;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -36,11 +37,19 @@
     & .balloon {
       background-color: #fef01b;
     }
+
+    & .time > span {
+      right: 2px;
+    }
   }
 
   &.theirs {
     & .balloon {
       background-color: #ffffff;
+    }
+
+    & .time > span {
+      left: 2px;
     }
   }
 
@@ -58,8 +67,6 @@
   }
 
   & .main {
-    flex: 1;
-
     & .name {
       padding: 6px 0;
       display: block;
@@ -68,7 +75,13 @@
   }
 
   & .time {
-    flex: 0 0 60px;
+    flex: 1 0 60px;
+
+    & > span {
+      position: absolute;
+      bottom: 2px;
+      font-size: 0.7rem;
+    }
   }
 }
 
