@@ -11,7 +11,8 @@ interface ChatRoomProps {
   chatRoomId: number;
 }
 const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
-  const bottomRef = useRef(null);
+  const chatRoomRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
   const [delayState, delayApi] = useDelay<ChatMessage>(rawMessages);
@@ -40,7 +41,10 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   }, [rawMessages]);
 
   useEffect(() => {
-    bottomRef?.current.scrollIntoView({ behavior: "smooth" });
+    chatRoomRef.current!.scrollTo({
+      top: bottomRef.current!.offsetTop,
+      behavior: "smooth"
+    });
   }, [messageGroups]);
 
   useEffect(() => {
@@ -60,7 +64,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   };
 
   return (
-    <div className="ChatRoom">
+    <div className="ChatRoom" ref={chatRoomRef}>
       {messageGroups.map((messages, i) => {
         if (messages.length === 0) {
           return null;
