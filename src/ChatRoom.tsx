@@ -1,21 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatMessage from "./types/ChatMessage";
 import ChatMessageList from "./ChatMessageList";
 import chatService from "./services/chatService";
+import useMessageGroup from "./hooks/useMessgeGroup";
 
 interface ChatRoomProps {
   chatRoomId: number;
 }
 const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-
-  const hasMessage = useMemo(() => {
-    return messages.length > 0;
-  }, [messages]);
+  const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
+  const messageGroups = useMessageGroup(rawMessages);
 
   const fetchChatMessages = async (chatRoomId: number) => {
     const data = await chatService.fetchChatMessages({ chatRoomId });
-    setMessages(data);
+    setRawMessages(data);
   };
 
   useEffect(() => {
@@ -24,7 +22,9 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
   return (
     <div className="ChatRoom">
-      {hasMessage && <ChatMessageList messages={messages} />}
+      {messageGroups.map((messages) => (
+        <ChatMessageList messages={messages} />
+      ))}
     </div>
   );
 };
