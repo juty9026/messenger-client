@@ -1,27 +1,11 @@
-import React, { useMemo } from "react";
-import ChatMessageOwner from "./types/ChatMessageOwner";
+import React from "react";
 
 interface ChatMessageListItemProps {
-  owner: ChatMessageOwner;
   text: string;
 }
-const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({
-  owner,
-  text
-}) => {
-  const itemClass = useMemo(() => {
-    switch (owner) {
-      case "me":
-        return "mine";
-      case "them":
-        return "theirs";
-      default:
-        return "unknown";
-    }
-  }, [owner]);
-
+const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({ text }) => {
   return (
-    <li className={`ChatMessageListItem ${itemClass}`}>
+    <li className="ChatMessageListItem">
       <div className="ballon">{text}</div>
     </li>
   );

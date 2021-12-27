@@ -32,6 +32,16 @@
 
   &.mine {
     flex-direction: row-reverse;
+
+    & .ballon {
+      background-color: #fef01b;
+    }
+  }
+
+  &.theirs {
+    & .ballon {
+      background-color: #ffffff;
+    }
   }
 
   & .avatar {
@@ -77,20 +87,6 @@
     display: none;
   }
   
-  &.theirs {
-
-      & .ballon {
-        background-color: #ffffff;
-      }
-  }
-
-  &.mine {
-
-    & .ballon {
-      background-color: #fef01b;
-    }
-  }
-
   & .ballon {
     padding: 6px 8px;
     vertical-align: middle;
