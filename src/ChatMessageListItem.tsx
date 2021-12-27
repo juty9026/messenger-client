@@ -6,7 +6,7 @@ interface ChatMessageListItemProps {
 const ChatMessageListItem: React.FC<ChatMessageListItemProps> = ({ text }) => {
   return (
     <li className="ChatMessageListItem">
-      <div className="ballon">{text}</div>
+      <div className="balloon">{text}</div>
     </li>
   );
 };

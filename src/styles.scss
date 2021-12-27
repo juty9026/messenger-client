@@ -33,13 +33,13 @@
   &.mine {
     flex-direction: row-reverse;
 
-    & .ballon {
+    & .balloon {
       background-color: #fef01b;
     }
   }
 
   &.theirs {
-    & .ballon {
+    & .balloon {
       background-color: #ffffff;
     }
   }
@@ -87,7 +87,7 @@
     display: none;
   }
   
-  & .ballon {
+  & .balloon {
     padding: 6px 8px;
     vertical-align: middle;
     display: inline-block;
