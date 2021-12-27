@@ -52,7 +52,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
     if (delayState.finish) {
       timeout = setTimeout(() => {
-        // delayApi.reset();
+        delayApi.reset();
       }, 5000);
     }
 
