@@ -24,7 +24,7 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
 
   return (
     <div className="ChatMessageGroup">
-      <div className="avatar-thumb-wrap">
+      <div className="avatar">
         {userProfile?.avatarSrc && (
           <img
             className="avatar-thumb"
@@ -34,7 +34,7 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
         )}
       </div>
       <div className="main">
-        <span className="name">{userProfile?.name}</span>
+        {owner === "them" && <span className="name">{userProfile?.name}</span>}
         <ChatMessageList
           userProfile={userProfile}
           messages={group}
