@@ -17,7 +17,9 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
 
   const timeDisplayText = useMemo(() => {
     const date = new Date();
-    return `${date.getHours()}:${date.getMinutes()}`;
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
   }, []);
 
   const owner: ChatMessageOwner = useMemo(() => {
