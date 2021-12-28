@@ -9,7 +9,7 @@ const useContinuousGroup = <T extends unknown>(
   // Lint error (react-hooks/exhaustive-deps)
   // https://github.com/facebook/react/pull/19751
   useEffect(() => {
-    const splitted = data.reduce<T[][]>((acc, cur) => {
+    const groups = data.reduce<T[][]>((acc, cur) => {
       if (acc.length === 0) {
         acc.push([]);
       }
@@ -21,7 +21,7 @@ const useContinuousGroup = <T extends unknown>(
       }
       return acc;
     }, []);
-    setGroups(splitted);
+    setGroups(groups);
   }, [data, groupBy]);
 
   return groups;
