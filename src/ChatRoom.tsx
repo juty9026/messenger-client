@@ -3,7 +3,7 @@ import ChatMessage from "./types/ChatMessage";
 import ChatMessageGroup from "./ChatMessageGroup";
 import chatService from "./services/chatService";
 import useDelay from "./hooks/useDelay";
-import useMessageGroup from "./hooks/useMessgeGroup";
+import useContinuousGroup from "./hooks/useContinuosGroup";
 import UserProfile from "./types/UserProfile";
 import profileService from "./services/profileService";
 
@@ -16,7 +16,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
   const [delayState, delayApi] = useDelay<ChatMessage>(rawMessages);
-  const messageGroups = useMessageGroup(delayState.data);
+  const messages = useContinuousGroup(delayState.data, "senderId");
 
   const fetchChatMessages = async (chatRoomId: number) => {
     const data = await chatService.fetchChatMessages({ chatRoomId });
@@ -45,7 +45,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
       top: bottomRef.current!.offsetTop,
       behavior: "smooth"
     });
-  }, [messageGroups]);
+  }, [messages]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -65,7 +65,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
   return (
     <div className="ChatRoom" ref={chatRoomRef}>
-      {messageGroups.map((group, i) => (
+      {messages.map((group, i) => (
         <ChatMessageGroup
           key={i}
           group={group}
