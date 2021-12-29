@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import AppContext from "./context/AppContext";
 import ChatMessageList from "./ChatMessageList";
 import ChatMessage from "./types/ChatMessage";
@@ -8,10 +8,12 @@ import UserProfile from "./types/UserProfile";
 interface ChatMessageGroupProps {
   group: ChatMessage[];
   userProfile: UserProfile;
+  avatarImageNode?: ReactNode;
 }
 const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
   group,
-  userProfile
+  userProfile,
+  avatarImageNode
 }) => {
   const { userId } = useContext(AppContext);
 
@@ -42,17 +44,7 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
 
   return (
     <div className={`ChatMessageGroup ${ownerClass}`}>
-      {owner === "them" && (
-        <div className="avatar">
-          {userProfile?.avatarSrc && (
-            <img
-              className="avatar-thumb"
-              src={`/images/${userProfile.avatarSrc}`}
-              alt={userProfile.avatarSrc}
-            />
-          )}
-        </div>
-      )}
+      {owner === "them" && <div className="avatar">{avatarImageNode}</div>}
       <div className="main">
         {owner === "them" && <span className="name">{userProfile?.name}</span>}
         <ChatMessageList messages={group} />
