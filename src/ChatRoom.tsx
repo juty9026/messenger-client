@@ -34,7 +34,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
   const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
   const [delayState, delayApi] = useDelay<ChatMessage>(rawMessages);
-  const messages = useContinuousGroup(delayState.data, "senderId");
+  const messages = useContinuousGroup<ChatMessage>(delayState.data, "senderId");
 
   const fetchChatMessages = async (chatRoomId: number) => {
     const data = await chatService.fetchChatMessages({ chatRoomId });
