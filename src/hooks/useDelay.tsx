@@ -23,7 +23,7 @@ const useDelay = <T extends unknown>(data: T[]): [DelayState<T>, DelayApi] => {
     } else {
       setFinish(false);
       const newMessages = data.slice(0, delayedData.length + 1);
-      timer = setTimeout(() => setDelayedData(newMessages), 1000);
+      timer = setTimeout(() => setDelayedData(newMessages), 1500);
     }
 
     return () => clearTimeout(timer);
