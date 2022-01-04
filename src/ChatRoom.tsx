@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatMessage from "./types/ChatMessage";
 import ChatMessageGroup from "./ChatMessageGroup";
 import chatService from "./services/chatService";
@@ -15,22 +15,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
-  const cachedAvatarImages = useMemo(
-    () =>
-      userProfiles
-        .filter(({ avatarSrc }) => !!avatarSrc)
-        .map(({ id, avatarSrc }) => ({
-          userId: id,
-          avatarImgNode: (
-            <img
-              className="avatar-thumb"
-              src={`/images/${avatarSrc}`}
-              alt={avatarSrc}
-            />
-          )
-        })),
-    [userProfiles]
-  );
 
   const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
   const [delayState, delayApi] = useDelay<ChatMessage>(rawMessages);
@@ -88,11 +72,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
           key={i}
           group={group}
           userProfile={getSenderProfile(group[0].senderId)}
-          avatarImageNode={
-            cachedAvatarImages.find(
-              ({ userId }) => group[0].senderId === userId
-            )?.avatarImgNode
-          }
         />
       ))}
       <div ref={bottomRef} />
