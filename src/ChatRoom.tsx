@@ -15,7 +15,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
-
   const [rawMessages, setRawMessages] = useState<ChatMessage[]>([]);
   const [delayState, delayApi] = useDelay<ChatMessage>(rawMessages);
   const messages = useContinuousGroup<ChatMessage>(delayState.data, "senderId");
@@ -28,6 +27,10 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
   const fetchUserProfiles = async (userIds: number[]) => {
     const data = await profileService.fetchUserProfiles({ userIds });
     setUserProfiles(data);
+  };
+
+  const getSenderProfile = (senderId: number): UserProfile => {
+    return userProfiles.find((p) => p.id === senderId)!;
   };
 
   useEffect(() => {
@@ -60,10 +63,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ chatRoomId }) => {
 
     return () => clearTimeout(timeout);
   }, [delayState.finish, delayApi]);
-
-  const getSenderProfile = (senderId: number): UserProfile => {
-    return userProfiles.find((p) => p.id === senderId)!;
-  };
 
   return (
     <div className="ChatRoom" ref={chatRoomRef}>
