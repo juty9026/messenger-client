@@ -3,7 +3,7 @@ import ChatMessage from "./types/ChatMessage";
 import ChatMessageGroup from "./ChatMessageGroup";
 import chatService from "./services/chatService";
 import useDelay from "./hooks/useDelay";
-import useContinuousGroup from "./hooks/useContinuosGroup";
+import useContinuousGroup from "./hooks/useContinuousGroup";
 import UserProfile from "./types/UserProfile";
 import profileService from "./services/profileService";
 
