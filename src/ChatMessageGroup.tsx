@@ -46,8 +46,8 @@ const ChatMessageGroup: React.FC<ChatMessageGroupProps> = ({
         <div className="avatar">
           <img
             className="avatar-thumb"
-            src={`/images/${userProfile.avatarSrc}`}
-            alt={userProfile.avatarSrc}
+            src={userProfile.avatarSrc}
+            alt={userProfile.name}
           />
         </div>
       )}
